@@ -7,7 +7,7 @@ const repository = axios.create({
   },
 });
 
-const Repository = (query: string, variables: Record<string, any> = {}) => {
+const Repository = (query: string, variables: Record<string, unknown> = {}) => {
   const body = {
     query,
     variables,
