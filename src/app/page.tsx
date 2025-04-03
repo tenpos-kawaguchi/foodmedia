@@ -1,16 +1,56 @@
-export default function Home() {
+"use client"; // Next.jsのClient Componentとして指定
+
+import React, { useEffect, useState } from "react";
+import PostService from "@/services/PostService";
+import type { PostType } from "@/types/PostType";
+import Link from "next/link";
+
+console.log("DB URL:", process.env.NEXT_PUBLIC_WP_ENDPOINT); // ✅ こうすればOK
+const Url = process.env.NEXT_PUBLIC_FOODMEDIA_URL;
+
+const Home = () => {
+  const [posts, setPosts] = useState<PostType[]>([]);
+
+  useEffect(() => {
+    const fetchPosts = async () => {
+      try {
+        const postService = new PostService();
+        const data = await postService.getList();
+        console.log("Fetched posts:", data); // デバッグ用
+        setPosts(data.slice(0, 10)); // 最初の10件のみ取得
+      } catch (error) {
+        console.error("Failed to fetch posts:", error);
+      }
+    };
+
+    fetchPosts();
+  }, []);
+
   return (
-    <div className="flex gap-4 mx-4">
-      <div className="w-1/2 flex flex-col gap-1">
-        <div className="bg-green-400">Column Left Row 1</div>
-        <div className="bg-green-400">Column Left Row 2</div>
-        <div className="bg-green-400">Column Left Row 3</div>
-      </div>
-      <div className="w-1/2  flex flex-col gap-1">
-        <div className="bg-blue-500">Column Right Row 1</div>
-        <div className="bg-blue-500">Column Right Row 2</div>
-        <div className="bg-blue-500">Column Right Row 3</div>
-      </div>
+    <div className="gap-4 mx-4">
+      <h2>最新記事10件</h2>
+      {posts.length > 0 ? (
+        posts.map(({ id, slug, title, postId, uri }) => (
+          <div key={postId} className="bg-gray-100 p-4 rounded shadow">
+            <Link
+              href={`${Url}${uri}`}
+              className="text-blue-500 hover:underline"
+            >
+              <h2 className="text-xl font-bold">{title}</h2>
+              <p>
+                {slug}
+                {id}
+                {postId}
+                {uri}
+              </p>
+            </Link>
+          </div>
+        ))
+      ) : (
+        <p>Loading...</p>
+      )}
     </div>
   );
-}
+};
+
+export default Home;
