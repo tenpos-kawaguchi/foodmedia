@@ -10,6 +10,11 @@ class PostRepository {
         title
         postId
         uri
+        featuredImage {
+          node {
+            sourceUrl(size: MEDIUM)
+          }
+        }
       }
     }
   }

@@ -4,6 +4,7 @@ import React, { useEffect, useState } from "react";
 import PostService from "@/services/PostService";
 import type { PostType } from "@/types/PostType";
 import Link from "next/link";
+import Image from "next/image";
 
 console.log("DB URL:", process.env.NEXT_PUBLIC_WP_ENDPOINT); // ✅ こうすればOK
 const Url = process.env.NEXT_PUBLIC_FOODMEDIA_URL;
@@ -30,7 +31,7 @@ const Home = () => {
     <div className="gap-4 mx-4">
       <h2>最新記事10件</h2>
       {posts.length > 0 ? (
-        posts.map(({ id, slug, title, postId, uri }) => (
+        posts.map(({ id, slug, title, postId, uri, featuredImage }) => (
           <div key={postId} className="bg-gray-100 p-4 rounded shadow">
             <Link
               href={`${Url}${uri}`}
@@ -42,6 +43,13 @@ const Home = () => {
                 {id}
                 {postId}
                 {uri}
+                <Image
+                  src={featuredImage?.node.sourceUrl}
+                  alt={title}
+                  width={500}
+                  height={300}
+                  className="rounded"
+                />
               </p>
             </Link>
           </div>

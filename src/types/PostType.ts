@@ -6,4 +6,9 @@ export interface PostType {
   postId: string;
   uri: string;
   content: string;
+  featuredImage: {
+    node: {
+      sourceUrl: string;
+    };
+  };
 }
