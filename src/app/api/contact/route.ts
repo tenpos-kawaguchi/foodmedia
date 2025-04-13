@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY!);
-console.log("Resend API Key:", process.env.RESEND_API_KEY);
+const resend = new Resend(process.env.NEXT_PUBLIC_RESEND_API_KEY!);
 
 export async function POST(req: NextRequest) {
   try {
@@ -16,8 +15,8 @@ export async function POST(req: NextRequest) {
     }
 
     await resend.emails.send({
-      from: "Acme <onboarding@resend.dev>",
-      to: ["yoshimasakawaguchi@gmail.com", email],
+      from: "y-kawaguchi@tenpos.com",
+      to: ["y-kawaguchi@tenpos.com", email],
       subject: "お問い合わせありがとうございます",
       html: `<p>${name} さん、<br>お問い合わせありがとうございます。<br>内容: ${message}</p>`,
     });
