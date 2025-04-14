@@ -4,15 +4,15 @@ import "./globals.css";
 import Header from "@/app/header";
 import Footer from "@/app/footer";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
+// const geistSans = Geist({
+//   variable: "--font-geist-sans",
+//   subsets: ["latin"],
+// });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+// const geistMono = Geist_Mono({
+//   variable: "--font-geist-mono",
+//   subsets: ["latin"],
+// });
 
 export const metadata: Metadata = {
   title: "foodmedia-next-sample",
@@ -29,7 +29,7 @@ export default function RootLayout({
       <body className="container mx-auto p-4">
         <div className="flex flex-col min-h-screen">
           <Header></Header>
-          <main className="flex-grow py-10">{children}</main>
+          <main className="flex-grow">{children}</main>
           <Footer></Footer>
         </div>
       </body>
