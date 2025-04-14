@@ -16,9 +16,17 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: "no-replay@test-next.tenposfoodplace-hp.com",
-      to: ["y-kawaguchi@tenpos.com", email],
+      to: [email],
       subject: "お問い合わせありがとうございます",
       html: `<p>${name} さん、<br>お問い合わせありがとうございます。<br>内容: ${message}</p>`,
+    });
+
+    await resend.emails.send({
+      from: "no-replay@test-next.tenposfoodplace-hp.com",
+      to: ["y-kawaguchi@tenpos.com"],
+      subject: "お問い合わせがありました。",
+      html: `<p>${name} さん、からお問い合わせがありました。<br>
+      内容: ${message}</p>`,
     });
 
     return NextResponse.json({ success: true });
