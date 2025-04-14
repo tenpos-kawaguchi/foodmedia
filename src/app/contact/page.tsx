@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Contact() {
   console.log("Resend API Key:", process.env.NEXT_PUBLIC_RESEND_API_KEY);
@@ -10,6 +11,7 @@ export default function Contact() {
     message: "",
   });
   const [status, setStatus] = useState("");
+  const router = useRouter();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -29,6 +31,7 @@ export default function Contact() {
     if (response.ok) {
       setStatus("送信成功しました！");
       setFormData({ name: "", email: "", message: "" });
+      router.push("/contact/thanks"); // 送信後にサンクスページへリダイレクト
     } else {
       setStatus("送信に失敗しました。");
     }
@@ -36,32 +39,49 @@ export default function Contact() {
 
   return (
     <div>
-      <h1>お問い合わせ</h1>
+      <h1 className="text-2xl font-bold mb-4">お問い合わせ</h1>
       <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          name="name"
-          placeholder="お名前"
-          value={formData.name}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="メールアドレス"
-          value={formData.email}
-          onChange={handleChange}
-          required
-        />
-        <textarea
-          name="message"
-          placeholder="お問い合わせ内容"
-          value={formData.message}
-          onChange={handleChange}
-          required
-        />
-        <button type="submit">送信</button>
+        <div className="mb-4 flex items-center">
+          <label htmlFor="name">お名前</label>
+          <input
+            type="text"
+            name="name"
+            placeholder="お名前"
+            value={formData.name}
+            onChange={handleChange}
+            required
+            className="ml-2 border border-gray-700 rounded-md p-2"
+          />
+        </div>
+        <div className="mb-4 flex items-center">
+          <label htmlFor="name">メールアドレス</label>
+          <input
+            type="email"
+            name="email"
+            placeholder="メールアドレス"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            className="ml-2 border border-gray-700 rounded-md p-2"
+          />
+        </div>
+        <div className="mb-4 flex items-center">
+          <label htmlFor="name">お問い合わせ内容</label>
+          <textarea
+            name="message"
+            placeholder="お問い合わせ内容"
+            value={formData.message}
+            onChange={handleChange}
+            required
+            className="ml-2 border border-gray-700 rounded-md p-2"
+          />
+        </div>
+        <button
+          type="submit"
+          className="bg-blue-500 text-white py-2 px-5 rounded-md"
+        >
+          送信
+        </button>
       </form>
       <p>{status}</p>
     </div>
