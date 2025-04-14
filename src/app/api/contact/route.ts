@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     await resend.emails.send({
-      from: "y-kawaguchi@tenpos.com",
+      from: "no-replay@test-next.tenposfoodplace-hp.com",
       to: ["y-kawaguchi@tenpos.com", email],
       subject: "お問い合わせありがとうございます",
       html: `<p>${name} さん、<br>お問い合わせありがとうございます。<br>内容: ${message}</p>`,
