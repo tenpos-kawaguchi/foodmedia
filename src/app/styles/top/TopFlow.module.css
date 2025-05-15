@@ -1,0 +1,46 @@
+/* --------------------開業支援フロー------------------- */
+.flow_top_area {
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+}
+
+.flow_bottom_area {
+  background-color: var(--BEIGE01);
+}
+
+.flow_bottom_bnr a {
+  display: block;
+  box-shadow:
+    0 5px 5px rgba(0, 0, 0, 0.1),
+    2px 0 5px rgba(0, 0, 0, 0.1),
+    -2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.flow_open_list_dl_img a {
+  border: 1px solid #aaa;
+}
+
+@media screen and (min-width: 768px) {
+  .flow_top_area {
+    background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/top/flow-bg.jpg);
+  }
+  .flow_open_list_dl_img {
+    margin-top: 50px;
+  }
+  .top_strong_txt {
+    margin: 50px 0;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .flow_top_area {
+    background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/top/sp/flow-bg.jpg);
+  }
+  .flow_open_list_dl_img {
+    margin-top: 30px;
+  }
+  .top_strong_txt {
+    margin: 30px 0;
+  }
+}

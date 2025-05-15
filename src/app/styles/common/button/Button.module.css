@@ -1,0 +1,67 @@
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  padding: 2rem 0.625rem;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .button {
+    padding: 1.25rem 0.375rem;
+  }
+}
+
+.button::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: inline-block;
+  width: calc(100% - 8px);
+  height: calc(100% - 8px);
+  border-radius: 0.5rem;
+  border: 2px solid white;
+}
+@media (max-width: 768px) {
+  .button::after {
+    border: 1px solid white;
+  }
+}
+.text {
+  text-align: center;
+  font-size: clamp(14px, 2vw, 24px);
+  font-weight: bold;
+  background: no-repeat left center;
+  background-size: 10px;
+  padding-left: 25px;
+  margin-top: -1px;
+  background-image: url("https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-right.svg");
+}
+@media (max-width: 768px) {
+  .text {
+    background-size: 8px;
+    padding-left: 15px;
+  }
+}
+
+/* カラー変数 */
+.white {
+  color: white;
+}
+
+.black {
+  color: black;
+}
+
+.red {
+  background-color: var(--color-red);
+}
+
+.green {
+  background-color: var(--color-green);
+}

@@ -1,0 +1,45 @@
+.singleBannerContainer {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.singleBanner {
+  padding: 2rem;
+}
+
+.singleBanner :global(.bannerContent) {
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+}
+
+.singleBanner :global(.bannerText) {
+  flex: 1;
+}
+
+.singleBanner :global(.bannerTitle) {
+  font-size: 1.5rem;
+}
+
+.singleBanner :global(.bannerDescription) {
+  font-size: 1rem;
+}
+
+.singleBanner :global(.bannerImage) {
+  width: 300px;
+  height: 200px;
+}
+
+@media (max-width: 768px) {
+  .singleBanner :global(.bannerContent) {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .singleBanner :global(.bannerImage) {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}

@@ -1,0 +1,78 @@
+/* --------------------トップ共通------------------- */
+
+/* テキスト */
+.top_strong_txt {
+  display: grid;
+}
+.top_strong_txt p {
+  line-height: 2;
+  text-align: center;
+}
+.top_strong_txt p .marker {
+  font-weight: 700;
+  background: linear-gradient(transparent 50%, var(--YELLOW01) 50%);
+}
+.top_txt {
+  display: grid;
+}
+.top_txt p {
+  line-height: 2;
+}
+@media screen and (min-width: 768px) {
+  .top_strong_txt {
+    margin-bottom: 40px;
+    gap: 40px;
+  }
+  .top_strong_txt p {
+    font-size: 26px;
+  }
+  .top_strong_txt p .marker {
+    padding-left: 10px;
+  }
+  .top_txt {
+    gap: 20px;
+  }
+  .top_txt p {
+    font-size: 16px;
+  }
+}
+@media screen and (max-width: 767px) {
+  .top_strong_txt {
+    margin-bottom: 30px;
+    gap: 20px;
+  }
+  .top_strong_txt p {
+    font-size: 16px;
+  }
+  .top_strong_txt p .marker {
+    padding-left: 5px;
+  }
+  .top_txt {
+    gap: 20px;
+  }
+  .top_txt p {
+    font-size: 14px;
+  }
+}
+
+/* spフロー展開 */
+@media screen and (max-width: 767px) {
+  .sp_toggle_contents {
+    display: none;
+  }
+  .sp_toggle_btn {
+    background-color: var(--GRAY01);
+    color: var(--WHITE);
+    text-align: center;
+    font-weight: 700;
+    padding: 10px 0;
+    font-size: 16px;
+    background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-up.svg);
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 15px;
+  }
+  .sp_toggle_btn.active {
+    background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+  }
+}

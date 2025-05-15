@@ -1,1 +1,293 @@
 @import "tailwindcss";
+
+@theme {
+  --color-red: #ea5350;
+  --color-secondary: #fb8c00;
+  --color-green: #06c755;
+  --color-blue: #86c6b9;
+}
+
+:root {
+  --WHITE: #fff;
+  --BLACK: #000;
+  --GRAY01: #ccc;
+  --GRAY02: #f4f4f4;
+  --GRAY03: #999999;
+  --RED01: #ea5350;
+  --BEIGE01: #faefdc;
+  --YELLOW01: #fafc67;
+  --GREEN01: #06c755;
+  --GREEN02: #86c6b9;
+  --RAMEN: #f28c8e;
+  --SWEETS: #fea676;
+  --CAFE: #f2ca68;
+  --PAN: #caca61;
+  --MEET: #60be9c;
+  --NOODLES: #4baab8;
+  --ITALIAN: #6591c0;
+  --IZAKAYA: #9989b4;
+  --HOTEL: #cb82a6;
+  --FLOUR: #cb8282;
+  --KAIGYO_URL: "https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp";
+}
+
+body {
+  font-family:
+    "Noto Sans JP", "游ゴシック", YuGothic, "ヒラギノ角ゴ ProN W3",
+    "Hiragino Kaku Gothic ProN", "メイリオ", Meiryo, sans-serif;
+}
+
+/* ===========================
+	共通 CSS
+=========================== */
+/* --------------------全ページ共通部分------------------- */
+main {
+  position: relative;
+  z-index: 1;
+}
+
+/* セクションタイトル */
+.sec-ttl span {
+  display: block;
+  text-align: center;
+}
+
+.sec-ttl .ja {
+  font-weight: 700;
+}
+
+.sec-ttl .en {
+  color: var(--RED01);
+}
+
+@media screen and (min-width: 768px) {
+  .sec-ttl {
+    margin-bottom: 30px;
+  }
+
+  .sec-ttl .ja {
+    font-size: 36px;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+
+  .sec-ttl .en {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .sec-ttl {
+    margin-bottom: 20px;
+  }
+
+  .sec-ttl .ja {
+    font-size: 22px;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .sec-ttl .en {
+    font-size: 14px;
+  }
+}
+
+/* 問い合わせボタン */
+.contact-btn li a {
+  display: block;
+  text-align: center;
+  position: relative;
+  color: var(--WHITE);
+  border-radius: var(--BDRS);
+  position: relative;
+  font-weight: 700;
+}
+
+.contact-btn li.contact a {
+  background-color: var(--RED01);
+}
+
+.contact-btn li.line a {
+  background-color: var(--GREEN01);
+}
+
+.contact-btn li a::after {
+  content: "";
+  display: inline-block;
+  width: calc(100% - var(--BD_POS));
+  height: calc(100% - var(--BD_POS));
+  border-radius: var(--BDRS);
+  border: var(--BD_WIDTH) solid var(--WHITE);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.contact-btn li a span {
+  /* background-image: url(./img/common/arrow-right.svg); */
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+@media screen and (min-width: 768px) {
+  .contact-btn {
+    display: flex;
+  }
+
+  .contact-btn li {
+    flex: 1;
+    margin: 0 20px;
+  }
+
+  .contact-btn li a {
+    --BDRS: 10px;
+    --BD_WIDTH: 2px;
+    --BD_POS: 10px;
+    padding: 30px 10px;
+    font-size: clamp(16px, 2vw, 24px);
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .contact-btn li a span {
+    background-size: 10px;
+    padding-left: 25px;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .contact-btn {
+    display: grid;
+    gap: 20px;
+  }
+
+  .contact-btn li a {
+    --BDRS: 8px;
+    --BD_WIDTH: 1.5px;
+    --BD_POS: 8px;
+    padding: 20px 10px;
+    font-size: 14px;
+  }
+
+  .contact-btn li a span {
+    background-size: 8px;
+    padding-left: 20px;
+  }
+}
+
+.align_center {
+  margin: 0 auto;
+}
+
+.main_content {
+  width: 100%;
+  padding: 0;
+  background: #f4f4f4;
+}
+
+.l-wrapper {
+  max-width: 1180px;
+  padding: 0;
+  margin: 0 auto;
+}
+
+.l-main {
+  width: calc(82% - 40px);
+  margin-bottom: 0;
+}
+
+.l-sidebar {
+  width: 220px;
+  margin-bottom: 50px;
+}
+
+@media only screen and (max-width: 1240px) {}
+
+@media only screen and (max-width: 992px) {
+  .l-main {
+    width: calc(70% - 40px);
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    font-size: 14px;
+  }
+
+  .l-main {
+    width: 100%;
+  }
+}
+
+.inner,
+.pc-inner {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .inner {
+    width: 95%;
+    max-width: 1180px;
+  }
+}
+
+/* フォントCSS */
+.roboto400 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.roboto500 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+}
+
+.roboto700 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+.roboto900 {
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+}
+
+/* imgリセット */
+.imgauto {
+  height: auto;
+  width: 100%;
+  box-sizing: unset;
+  line-height: 1rem;
+  display: block;
+}
+
+/* 非表示 */
+.pc-dis {
+  display: none;
+}
+
+.sp-dis {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+
+  /* 非表示 */
+  .pc-dis {
+    display: block;
+  }
+
+  .sp-dis {
+    display: none;
+  }
+}

@@ -3,12 +3,8 @@ export interface PostType {
   slug: string;
   title: string;
   date: string;
-  postId: string;
+  openmapId: string;
   uri: string;
   content: string;
-  featuredImage: {
-    node: {
-      sourceUrl: string;
-    };
-  };
+  featuredImage: { node: { sourceUrl: string; sizes: string } };
 }

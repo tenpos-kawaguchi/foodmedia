@@ -1,0 +1,27 @@
+.l_footer {
+  background-color: #ea5350;
+  color: #fff;
+}
+.open_footer {
+  padding-top: 40px;
+  text-align: center;
+}
+.open_footer img {
+  margin: 0 auto;
+  margin-bottom: 20px;
+}
+.bottomFooter {
+  background-color: #ea5350;
+  padding: 20px 0 80px 0;
+}
+.bottomFooter__copyright {
+  text-align: center;
+  letter-spacing: 0.5px;
+  line-height: 1.75;
+}
+.bottomFooter__link {
+  text-decoration: inherit;
+}
+.bottomFooter__link:hover {
+  text-decoration: underline;
+}
