@@ -23,14 +23,4 @@
 
 .h3Title {
   font-size: 1.25rem;
-  font-weight: 700;
-  line-height: 1rem;
-  margin-bottom: 0.625rem;
-  display: block;
-}
-
-@media (min-width: 768px) {
-  .h3Title {
-    font-size: 1.875rem;
-  }
 }

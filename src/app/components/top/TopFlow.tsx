@@ -1,11 +1,11 @@
-import React from "react";
-import Image from "next/image";
-import commonStyles from "@/app/styles/top/TopCommon.module.css";
-import styles from "@/app/styles/top/TopFlow.module.css";
-import TopPageTitle from "./TopPageTitle";
-import Link from "next/link";
-import Button from "../common/button/Button";
-import ToggleContent from "../common/toggle/ToggleContent";
+import React from 'react';
+import Image from 'next/image';
+import commonStyles from '@/app/styles/top/TopCommon.module.css';
+import styles from '@/app/styles/top/TopFlow.module.css';
+import TopPageTitle from './TopPageTitle';
+import Link from 'next/link';
+import Button from '../common/button/Button';
+import ToggleContent from '../common/toggle/ToggleContent';
 
 const TopFlow = () => {
   return (
@@ -14,10 +14,7 @@ const TopFlow = () => {
         <TopPageTitle level={2} enText="FLOW" className="mb-7">
           開業支援フロー
         </TopPageTitle>
-        <ToggleContent
-          toggleButtonText="開業支援フロー図"
-          className={`${styles.flow_img} inner`}
-        >
+        <ToggleContent toggleButtonText="開業支援フロー図" className={`${styles.flow_img} inner`}>
           <Image
             src="https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/top/sp/flow.jpg"
             alt="開業支援フロー"
@@ -55,14 +52,8 @@ const TopFlow = () => {
             />
           </Link>
         </p>
-        <p
-          className={`${styles.flow_open_list_dl_img} ${styles.flow_bottom_bnr} inner`}
-        >
-          <Link
-            className={styles.click_main_banner}
-            href="/kaigyo/list/"
-            target="_blank"
-          >
+        <p className={`${styles.flow_open_list_dl_img} ${styles.flow_bottom_bnr} inner`}>
+          <Link className={styles.click_main_banner} href="/kaigyo/list/" target="_blank">
             <Image
               src="https://www.tenpos.com/kaigyo/wp/wp-content/themes/the-thor-child/img/bnr_open-list-dl.png"
               alt="飲食店開業準備リスト"
@@ -92,14 +83,14 @@ const TopFlow = () => {
         <ul className="flex justify-center gap-4 inner">
           <li className="mx-5 flex-1">
             <Link href="/kaigyo/contact/" target="_blank" className="w-full">
-              <Button color={"white"} bg={"red"}>
+              <Button color={'red'} size={'lg'}>
                 開業に関するお問い合わせはこちら
               </Button>
             </Link>
           </li>
           <li className="mx-5 flex-1">
             <Link href="/line/" target="_blank" className="w-full">
-              <Button color={"white"} bg={"green"}>
+              <Button color={'green'} size={'lg'}>
                 簡単LINEで相談
               </Button>
             </Link>

@@ -1,11 +1,6 @@
-@import "tailwindcss";
-
-@theme {
-  --color-red: #ea5350;
-  --color-secondary: #fb8c00;
-  --color-green: #06c755;
-  --color-blue: #86c6b9;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
   --WHITE: #fff;
@@ -14,6 +9,7 @@
   --GRAY02: #f4f4f4;
   --GRAY03: #999999;
   --RED01: #ea5350;
+  --BLUE01: #86c6b9;
   --BEIGE01: #faefdc;
   --YELLOW01: #fafc67;
   --GREEN01: #06c755;

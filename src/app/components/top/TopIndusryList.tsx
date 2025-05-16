@@ -1,8 +1,9 @@
-import Link from "next/link";
-import styles from "@/app/styles/top/TopIndustryList.module.css";
-import commonStyles from "@/app/styles/top/TopCommon.module.css";
-import ButtonSmall from "@/app/components/common/button/ButtonSmall";
-import ToggleContent from "../common/toggle/ToggleContent";
+import Link from 'next/link';
+import styles from '@/app/styles/top/TopIndustryList.module.css';
+import commonStyles from '@/app/styles/top/TopCommon.module.css';
+import ButtonSmall from '@/app/components/common/button/ButtonSmall';
+import ToggleContent from '../common/toggle/ToggleContent';
+import Button from '../common/button/Button';
 
 type FlowStep = {
   label: string;
@@ -27,10 +28,7 @@ export const IndustryList = ({
   specialPageLink,
 }: IndustryListProps) => {
   return (
-    <li
-      className={`${styles[className]} relative py-10 px-[4%] bg-white`}
-      id={`link-${className}`}
-    >
+    <li className={`${styles[className]} relative py-10 px-[4%] bg-white`} id={`link-${className}`}>
       <div className={styles.industryDescTop}>
         <h3 className={styles.industryName}>{title}開業</h3>
         <div className={commonStyles.top_txt}>
@@ -38,17 +36,14 @@ export const IndustryList = ({
             <p
               key={i}
               dangerouslySetInnerHTML={{
-                __html: text.replace(/\n/g, "<br />"),
+                __html: text.replace(/\n/g, '<br />'),
               }}
             />
           ))}
         </div>
       </div>
 
-      <ToggleContent
-        toggleButtonText="開業支援フロー図"
-        className={styles.flow_img}
-      >
+      <ToggleContent toggleButtonText="開業支援フロー図" className={styles.flow_img}>
         <div className="sp-toggle-contents">
           <ul className={styles.industryFlow}>
             {flowSteps.map((step, i) => (
@@ -57,7 +52,7 @@ export const IndustryList = ({
                   <Link href={`https://www.tenpos.com${step.url}`}>
                     <span
                       dangerouslySetInnerHTML={{
-                        __html: step.label.replace(" ", '<br class="pc" />'),
+                        __html: step.label.replace(' ', '<br class="pc" />'),
                       }}
                     />
                   </Link>
@@ -73,9 +68,9 @@ export const IndustryList = ({
       <ul className={styles.industryLink}>
         <li className={styles.map}>
           <Link href={detailLink}>
-            <ButtonSmall color={"white"} bg={"red"}>
+            <Button color={'red'} size={'sm'}>
               開業の流れを詳しく見る
-            </ButtonSmall>
+            </Button>
           </Link>
         </li>
         {specialPageLink ? (
@@ -86,13 +81,13 @@ export const IndustryList = ({
               target="_blank"
               rel="noopener noreferrer"
             >
-              <ButtonSmall color={"white"} bg={"blue"}>
+              <Button color={'blue'} size={'sm'}>
                 {title}専門ページ
-              </ButtonSmall>
+              </Button>
             </Link>
           </li>
         ) : (
-          ""
+          ''
         )}
       </ul>
     </li>
