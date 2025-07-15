@@ -1,37 +1,41 @@
-"use client"; // Next.jsのClient Componentとして指定
-
-import React, { useEffect, useState } from "react";
+import React from "react";
 import PostService from "@/services/PostService";
-import type { PostType } from "@/types/PostType";
 import Link from "next/link";
 import Image from "next/image";
+import type { Metadata } from "next";
 
-console.log("DB URL:", process.env.NEXT_PUBLIC_WP_ENDPOINT); // ✅ こうすればOK
 const Url = process.env.NEXT_PUBLIC_FOODMEDIA_URL;
 
-const Home = () => {
-  const [posts, setPosts] = useState<PostType[]>([]);
+export const metadata: Metadata = {
+  title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+  description:
+    "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
+  keywords: "料理,レシピ,食材,飲食店,グルメ,フード",
+  openGraph: {
+    title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+    description:
+      "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
+    type: "website",
+    locale: "ja_JP",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+    description:
+      "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
+  },
+};
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const postService = new PostService();
-        const data = await postService.getList();
-        console.log("Fetched posts:", data); // デバッグ用
-        setPosts(data.slice(0, 10)); // 最初の10件のみ取得
-      } catch (error) {
-        console.error("Failed to fetch posts:", error);
-      }
-    };
-
-    fetchPosts();
-  }, []);
+const Home = async () => {
+  const postService = new PostService();
+  const posts = await postService.getList();
+  const recentPosts = posts.slice(0, 10); // 最初の10件のみ取得
 
   return (
     <div className="gap-4 mx-4">
       <h2>最新記事10件</h2>
-      {posts.length > 0 ? (
-        posts.map(({ id, slug, title, postId, uri, featuredImage }) => (
+      {recentPosts.length > 0 ? (
+        recentPosts.map(({ id, slug, title, postId, uri, featuredImage }) => (
           <div key={postId} className="bg-gray-100 p-4 rounded shadow">
             <Link
               href={`${Url}${uri}`}
@@ -43,19 +47,21 @@ const Home = () => {
                 {id}
                 {postId}
                 {uri}
-                <Image
-                  src={featuredImage?.node.sourceUrl}
-                  alt={title}
-                  width={500}
-                  height={300}
-                  className="rounded"
-                />
+                {featuredImage?.node.sourceUrl && (
+                  <Image
+                    src={featuredImage.node.sourceUrl}
+                    alt={title}
+                    width={500}
+                    height={300}
+                    className="rounded"
+                  />
+                )}
               </p>
             </Link>
           </div>
         ))
       ) : (
-        <p>Loading...</p>
+        <p>記事が見つかりませんでした。</p>
       )}
     </div>
   );

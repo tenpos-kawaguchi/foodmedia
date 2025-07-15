@@ -12,6 +12,15 @@ class PostService {
       return []; // エラーだった場合は空のpostListにする
     }
   }
+
+  public async getBySlug(slug: string): Promise<PostType | null> {
+    try {
+      const res = await RepositoryFactory.post.getBySlug(slug);
+      return res.data.data.post;
+    } catch {
+      return null; // エラーだった場合はnullを返す
+    }
+  }
 }
 
 export default PostService;

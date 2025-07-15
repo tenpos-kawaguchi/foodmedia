@@ -20,6 +20,40 @@ class PostRepository {
   }
 }`).getWp(); // graphQLのIDEのをコピペ
   }
+
+  public getBySlug(slug: string) {
+    return Repository(
+      `query getPostBySlug($slug: ID!) {
+  post(id: $slug, idType: SLUG) {
+    slug
+    title
+    postId
+    uri
+    date
+    modified
+    excerpt
+    content
+    featuredImage {
+      node {
+        sourceUrl(size: LARGE)
+      }
+    }
+    author {
+      node {
+        name
+      }
+    }
+    categories {
+      nodes {
+        name
+        slug
+      }
+    }
+  }
+}`,
+      { slug }
+    ).getWp();
+  }
 }
 
 export default PostRepository;

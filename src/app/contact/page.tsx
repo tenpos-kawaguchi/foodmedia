@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function Contact() {
-  console.log("Resend API Key:", process.env.NEXT_PUBLIC_RESEND_API_KEY);
   const [formData, setFormData] = useState({
     name: "",
     email: "",

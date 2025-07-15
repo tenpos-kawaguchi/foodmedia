@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   images: {
-    domains: ["test-cms-foodmedia.tenposfoodplace-hp.com"],
+    domains: ["cms-tenpos.tenposfoodplace-hp.com"],
   },
 };
 
