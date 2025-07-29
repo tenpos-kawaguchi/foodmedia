@@ -54,6 +54,40 @@ class PostRepository {
       { slug }
     ).getWp();
   }
+
+  public getById(id: string) {
+    return Repository(
+      `query getPostById($id: ID!) {
+  post(id: $id, idType: DATABASE_ID) {
+    slug
+    title
+    postId
+    uri
+    date
+    modified
+    excerpt
+    content
+    featuredImage {
+      node {
+        sourceUrl(size: LARGE)
+      }
+    }
+    author {
+      node {
+        name
+      }
+    }
+    categories {
+      nodes {
+        name
+        slug
+      }
+    }
+  }
+}`,
+      { id }
+    ).getWp();
+  }
 }
 
 export default PostRepository;

@@ -19,6 +19,23 @@ const Nav = () => {
     return pathname.startsWith(item.uri) || isCurrentPage(item.uri);
   };
 
+  // 未分類カテゴリを除外するフィルタリング
+  const filteredMenuItems = menuItems.filter((item) => {
+    // 未分類カテゴリを除外
+    if (item.name === "未分類" || item.slug === "uncategorized") {
+      return false;
+    }
+
+    // 子カテゴリも未分類を除外
+    if (item.children) {
+      item.children = item.children.filter((child) => {
+        return child.name !== "未分類" && child.slug !== "uncategorized";
+      });
+    }
+
+    return true;
+  });
+
   if (loading) {
     return (
       <div>
@@ -49,7 +66,7 @@ const Nav = () => {
         <ul
           className={`${styles.menu} flex justify-between max-w-[1130px] mx-auto`}
         >
-          {menuItems.map((item) => (
+          {filteredMenuItems.map((item) => (
             <li
               key={item.id}
               className={`${styles.menuItem} ${styles.menuItemTypeTaxonomy} ${styles.menuItemObjectCategory} ${

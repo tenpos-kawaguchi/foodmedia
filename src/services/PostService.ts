@@ -15,8 +15,44 @@ class PostService {
 
   public async getBySlug(slug: string): Promise<PostType | null> {
     try {
+      // まずスラッグで試行
       const res = await RepositoryFactory.post.getBySlug(slug);
+      if (res.data.data.post) {
+        return res.data.data.post;
+      }
+
+      // スラッグで見つからない場合は記事IDとして試行
+      const resById = await RepositoryFactory.post.getById(slug);
+      return resById.data.data.post;
+    } catch {
+      return null; // エラーだった場合はnullを返す
+    }
+  }
+
+  public async getById(id: string): Promise<PostType | null> {
+    try {
+      const res = await RepositoryFactory.post.getById(id);
       return res.data.data.post;
+    } catch {
+      return null; // エラーだった場合はnullを返す
+    }
+  }
+
+  // サブカテゴリとスラッグから記事を取得
+  public async getBySubCategoryAndSlug(
+    subCategory: string,
+    slug: string
+  ): Promise<PostType | null> {
+    try {
+      // まずスラッグで試行
+      const res = await RepositoryFactory.post.getBySlug(slug);
+      if (res.data.data.post) {
+        return res.data.data.post;
+      }
+
+      // スラッグで見つからない場合は記事IDとして試行
+      const resById = await RepositoryFactory.post.getById(slug);
+      return resById.data.data.post;
     } catch {
       return null; // エラーだった場合はnullを返す
     }
