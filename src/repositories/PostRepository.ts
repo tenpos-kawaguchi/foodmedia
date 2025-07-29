@@ -2,23 +2,30 @@ import Repository from "./Repository";
 
 class PostRepository {
   public getList() {
-    return Repository(`query testQuery {
-  posts {
-    edges {
-      node {
-        slug
-        title
-        postId
-        uri
-        featuredImage {
-          node {
-            sourceUrl(size: MEDIUM)
+    return Repository(
+      `query OpenmapQuery {
+        openmaps {
+          edges {
+            node {
+              slug
+              title
+              uri
+              id
+              openmapId
+            }
           }
         }
-      }
-    }
+      }`
+    ).getWp(); // graphQLのIDEのをコピペ
   }
-}`).getWp(); // graphQLのIDEのをコピペ
+
+  // 新しいクエリを追加する例
+  public getNewQuery() {
+    return Repository(
+      `query NewQuery {
+  // ここに新しいクエリを記述
+}`
+    ).getWp();
   }
 
   public getBySlug(slug: string) {

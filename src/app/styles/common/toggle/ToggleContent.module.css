@@ -1,0 +1,23 @@
+.toggle_btn {
+  background-color: var(--GRAY01);
+  color: var(--WHITE);
+  text-align: center;
+  font-weight: 700;
+  padding: 10px 0;
+  font-size: 16px;
+  background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-up.svg);
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 15px;
+  margin-top: 30px;
+}
+.active {
+  background-image: url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+.toggle_contents {
+  transition: all 0.3s ease;
+}
+
+.hidden {
+  display: none;
+}

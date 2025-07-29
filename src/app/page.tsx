@@ -1,28 +1,28 @@
-import React from "react";
-import PostService from "@/services/PostService";
-import Link from "next/link";
-import Image from "next/image";
-import type { Metadata } from "next";
+import React from 'react';
+import PostService from '@/services/PostService';
+import Link from 'next/link';
+import Image from 'next/image';
+import type { Metadata } from 'next';
 
 const Url = process.env.NEXT_PUBLIC_FOODMEDIA_URL;
 
 export const metadata: Metadata = {
-  title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+  title: 'FoodMedia - 食に関する情報を共有するプラットフォーム',
   description:
-    "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
-  keywords: "料理,レシピ,食材,飲食店,グルメ,フード",
+    '最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。',
+  keywords: '料理,レシピ,食材,飲食店,グルメ,フード',
   openGraph: {
-    title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+    title: 'FoodMedia - 食に関する情報を共有するプラットフォーム',
     description:
-      "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
-    type: "website",
-    locale: "ja_JP",
+      '最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。',
+    type: 'website',
+    locale: 'ja_JP',
   },
   twitter: {
-    card: "summary_large_image",
-    title: "FoodMedia - 食に関する情報を共有するプラットフォーム",
+    card: 'summary_large_image',
+    title: 'FoodMedia - 食に関する情報を共有するプラットフォーム',
     description:
-      "最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。",
+      '最新の料理レシピ、食材情報、飲食店レビューなど、食に関する様々な情報を共有するプラットフォームです。',
   },
 };
 
@@ -37,10 +37,7 @@ const Home = async () => {
       {recentPosts.length > 0 ? (
         recentPosts.map(({ id, slug, title, postId, uri, featuredImage }) => (
           <div key={postId} className="bg-gray-100 p-4 rounded shadow">
-            <Link
-              href={`${Url}${uri}`}
-              className="text-blue-500 hover:underline"
-            >
+            <Link href={`${Url}${uri}`} className="text-blue-500 hover:underline">
               <h2 className="text-xl font-bold">{title}</h2>
               <p>
                 {slug}

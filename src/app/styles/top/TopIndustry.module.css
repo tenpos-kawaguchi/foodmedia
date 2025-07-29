@@ -1,0 +1,120 @@
+.industry_nav {
+  display: block;
+  color: var(--WHITE);
+  padding: 22px 20px 25px 25%;
+  background-size: 15%, 12px;
+  background-position:
+    left 6% center,
+    bottom 8px center;
+  background-repeat: no-repeat, no-repeat;
+  height: 100%;
+}
+.industry_nav_span {
+  padding: 22px 0 0 20px;
+  height: 100%;
+  border-left: 2px solid var(--WHITE);
+  position: relative;
+  font-weight: 700;
+  display: inline-block;
+  font-size: 18px;
+}
+@media screen and (min-width: 768px) {
+  .industry_nav_span {
+    font-size: 20px;
+    padding: 22px 0 0 10%;
+  }
+}
+.industry_nav_span::before {
+  left: 21px;
+  font-size: 14px;
+  display: block;
+  content: "飲食店開業マップ";
+  font-weight: 500;
+  white-space: nowrap;
+  position: absolute;
+  top: 0;
+}
+@media screen and (min-width: 768px) {
+  .industry_nav_span::before {
+    left: 28px;
+    font-size: 14px;
+  }
+}
+
+.ramen {
+  background-color: #f28c8e;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/ramen.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.cake {
+  background-color: #fea676;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/sweets.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.cafe {
+  background-color: #f2ca68;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/cafe.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.bakery {
+  background-color: #caca61;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/pan.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.yakiniku {
+  background-color: #60be9c;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/meet.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.noodles {
+  background-color: #4baab8;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/noodles.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.italian {
+  background-color: #6591c0;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/italian.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.izakaya {
+  background-color: #9989b4;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/izakaya.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.hotel {
+  background-color: #cb82a6;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/hotel.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.flour {
+  background-color: #cb8282;
+  background-image:
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/flour.svg),
+    url(https://cms-tenpos.tenposfoodplace-hp.com/kaigyo/wp/wp-content/themes/the-thor-child/img/common/arrow-down.svg);
+}
+
+.industryDescArea {
+  background-color: var(--GRAY02);
+}
+
+.industryDesc {
+  display: grid;
+}
