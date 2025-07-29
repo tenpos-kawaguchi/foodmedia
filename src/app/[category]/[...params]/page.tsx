@@ -1,9 +1,9 @@
-import React from "react";
-import CategoryService from "@/services/CategoryService";
-import PostService from "@/services/PostService";
-import Image from "next/image";
-import type { Metadata } from "next";
-import { notFound } from "next/navigation";
+import React from 'react';
+import CategoryService from '@/services/CategoryService';
+import PostService from '@/services/PostService';
+import Image from 'next/image';
+import type { Metadata } from 'next';
+import { notFound } from 'next/navigation';
 
 interface CategoryParamsPageProps {
   params: Promise<{
@@ -13,9 +13,7 @@ interface CategoryParamsPageProps {
 }
 
 // 動的メタタグ生成
-export async function generateMetadata({
-  params,
-}: CategoryParamsPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryParamsPageProps): Promise<Metadata> {
   const categoryService = new CategoryService();
   const { category, params: subParams } = await params;
   console.log(category, subParams);
@@ -25,15 +23,13 @@ export async function generateMetadata({
     const categoryData = await categoryService.getBySlug(category);
     if (!categoryData) {
       return {
-        title: "カテゴリが見つかりません - FoodMedia",
-        description: "指定されたカテゴリが見つかりませんでした。",
+        title: 'カテゴリが見つかりません - FoodMedia',
+        description: '指定されたカテゴリが見つかりませんでした。',
       };
     }
     return {
       title: `${categoryData.name} - FoodMedia`,
-      description:
-        categoryData.description ||
-        `${categoryData.name}に関する記事一覧です。`,
+      description: categoryData.description || `${categoryData.name}に関する記事一覧です。`,
     };
   } else if (subParams.length === 1) {
     // サブカテゴリ一覧ページまたは記事詳細ページ
@@ -44,9 +40,7 @@ export async function generateMetadata({
     if (categoryData) {
       return {
         title: `${categoryData.name} - FoodMedia`,
-        description:
-          categoryData.description ||
-          `${categoryData.name}に関する記事一覧です。`,
+        description: categoryData.description || `${categoryData.name}に関する記事一覧です。`,
       };
     }
 
@@ -61,8 +55,8 @@ export async function generateMetadata({
     }
 
     return {
-      title: "ページが見つかりません - FoodMedia",
-      description: "指定されたページが見つかりませんでした。",
+      title: 'ページが見つかりません - FoodMedia',
+      description: '指定されたページが見つかりませんでした。',
     };
   } else if (subParams.length === 2) {
     // サブカテゴリ記事詳細ページ
@@ -71,8 +65,8 @@ export async function generateMetadata({
     const categoryData = await categoryService.getBySlug(fullSlug);
     if (!categoryData) {
       return {
-        title: "サブカテゴリが見つかりません - FoodMedia",
-        description: "指定されたサブカテゴリが見つかりませんでした。",
+        title: 'サブカテゴリが見つかりません - FoodMedia',
+        description: '指定されたサブカテゴリが見つかりませんでした。',
       };
     }
     return {
@@ -81,8 +75,8 @@ export async function generateMetadata({
     };
   }
   return {
-    title: "ページが見つかりません - FoodMedia",
-    description: "指定されたページが見つかりませんでした。",
+    title: 'ページが見つかりません - FoodMedia',
+    description: '指定されたページが見つかりませんでした。',
   };
 }
 
@@ -97,9 +91,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
     if (!categoryData) {
       return (
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-2xl font-bold text-red-600">
-            カテゴリが見つかりません
-          </h1>
+          <h1 className="text-2xl font-bold text-red-600">カテゴリが見つかりません</h1>
         </div>
       );
     }
@@ -112,10 +104,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
         <p className="text-sm text-gray-500">記事数: {categoryData.count}件</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {categoryData.posts.map((post) => (
-            <article
-              key={post.id}
-              className="bg-white rounded-lg shadow-md overflow-hidden"
-            >
+            <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
               {post.featuredImage?.node?.sourceUrl && (
                 <Image
                   src={post.featuredImage.node.sourceUrl}
@@ -127,16 +116,11 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
               )}
               <div className="p-4">
                 <h2 className="text-xl font-semibold mb-2">
-                  <a
-                    href={post.uri}
-                    className="hover:text-blue-600 transition-colors"
-                  >
+                  <a href={post.uri} className="hover:text-blue-600 transition-colors">
                     {post.title}
                   </a>
                 </h2>
-                {post.excerpt && (
-                  <p className="text-gray-600 text-sm mb-2">{post.excerpt}</p>
-                )}
+                {post.excerpt && <p className="text-gray-600 text-sm mb-2">{post.excerpt}</p>}
                 <p className="text-xs text-gray-500">{post.date}</p>
               </div>
             </article>
@@ -155,7 +139,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
 
     // まずカテゴリとして試行
     const categoryData = await categoryService.getBySlug(subCategory);
-    console.log("categoryData", categoryData);
+    console.log('categoryData', categoryData);
 
     if (categoryData) {
       // カテゴリが見つかった場合 - サブカテゴリ一覧ページとして表示
@@ -172,15 +156,10 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
           {categoryData.description && (
             <p className="text-gray-600 mb-4">{categoryData.description}</p>
           )}
-          <p className="text-sm text-gray-500">
-            記事数: {categoryData.count}件
-          </p>
+          <p className="text-sm text-gray-500">記事数: {categoryData.count}件</p>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {categoryData.posts.map((post) => (
-              <article
-                key={post.id}
-                className="bg-white rounded-lg shadow-md overflow-hidden"
-              >
+              <article key={post.id} className="bg-white rounded-lg shadow-md overflow-hidden">
                 {post.featuredImage?.node?.sourceUrl && (
                   <Image
                     src={post.featuredImage.node.sourceUrl}
@@ -192,16 +171,11 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
                 )}
                 <div className="p-4">
                   <h2 className="text-xl font-semibold mb-2">
-                    <a
-                      href={post.uri}
-                      className="hover:text-blue-600 transition-colors"
-                    >
+                    <a href={post.uri} className="hover:text-blue-600 transition-colors">
                       {post.title}
                     </a>
                   </h2>
-                  {post.excerpt && (
-                    <p className="text-gray-600 text-sm mb-2">{post.excerpt}</p>
-                  )}
+                  {post.excerpt && <p className="text-gray-600 text-sm mb-2">{post.excerpt}</p>}
                   <p className="text-xs text-gray-500">{post.date}</p>
                 </div>
               </article>
@@ -209,9 +183,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
           </div>
           {categoryData.posts.length === 0 && (
             <div className="text-center py-8">
-              <p className="text-gray-500">
-                このサブカテゴリには記事がありません。
-              </p>
+              <p className="text-gray-500">このサブカテゴリには記事がありません。</p>
             </div>
           )}
         </div>
@@ -223,9 +195,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
       if (!post) {
         return (
           <div className="container mx-auto px-4 py-8">
-            <h1 className="text-2xl font-bold text-red-600">
-              ページが見つかりません
-            </h1>
+            <h1 className="text-2xl font-bold text-red-600">ページが見つかりません</h1>
             <p className="text-gray-600 mt-2">
               指定されたページ「{category}/{subCategory}
               」が見つかりませんでした。
@@ -301,9 +271,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
     if (!categoryData) {
       return (
         <div className="container mx-auto px-4 py-8">
-          <h1 className="text-2xl font-bold text-red-600">
-            サブカテゴリが見つかりません
-          </h1>
+          <h1 className="text-2xl font-bold text-red-600">サブカテゴリが見つかりません</h1>
           <p className="text-gray-600 mt-2">
             指定されたサブカテゴリ「{category}/{subCategory}
             」が見つかりませんでした。
@@ -323,21 +291,14 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
               {category}
             </a>
             <span className="mx-2">/</span>
-            <a
-              href={`/${category}/${subCategory}`}
-              className="hover:text-blue-600"
-            >
+            <a href={`/${category}/${subCategory}`} className="hover:text-blue-600">
               {subCategory}
             </a>
             <span className="mx-2">/</span>
             <span>{slug}</span>
           </nav>
-          <h1 className="text-2xl font-bold text-red-600">
-            記事が見つかりません
-          </h1>
-          <p className="text-gray-600 mt-2">
-            指定された記事「{slug}」が見つかりませんでした。
-          </p>
+          <h1 className="text-2xl font-bold text-red-600">記事が見つかりません</h1>
+          <p className="text-gray-600 mt-2">指定された記事「{slug}」が見つかりませんでした。</p>
         </div>
       );
     }
@@ -349,10 +310,7 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
             {category}
           </a>
           <span className="mx-2">/</span>
-          <a
-            href={`/${category}/${subCategory}`}
-            className="hover:text-blue-600"
-          >
+          <a href={`/${category}/${subCategory}`} className="hover:text-blue-600">
             {subCategory}
           </a>
           <span className="mx-2">/</span>
