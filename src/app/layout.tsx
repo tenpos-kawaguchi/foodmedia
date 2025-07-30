@@ -80,7 +80,6 @@ export default function RootLayout({
         <div className="flex flex-col min-h-screen">
           <Header></Header>
           <main className="flex-grow">{children}</main>
-          <CommonBanner />
           <Footer></Footer>
         </div>
       </body>
