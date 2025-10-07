@@ -1,8 +1,15 @@
-import React from "react";
-import CategoryService from "@/services/CategoryService";
-import Image from "next/image";
-import type { Metadata } from "next";
-import { generateCategoryMetadata } from "@/lib/metadata";
+import React from 'react';
+import CategoryService from '@/services/CategoryService';
+import type { Metadata } from 'next';
+import { generateCategoryMetadata } from '@/lib/metadata';
+import PostList from '@/app/components/posts/PostList';
+import CategoryTitle from '@/app/components/common/title/CategoryTitle';
+import {
+  TowColumn,
+  TowColumnMain,
+  TowColumnSidebar,
+} from '@/app/components/layouts/column/TwoColumn';
+import SideNav from '../components/layouts/sideNav/SideNav';
 
 interface CategoryPageProps {
   params: Promise<{
@@ -11,17 +18,15 @@ interface CategoryPageProps {
 }
 
 // 動的メタタグ生成
-export async function generateMetadata({
-  params,
-}: CategoryPageProps): Promise<Metadata> {
+export async function generateMetadata({ params }: CategoryPageProps): Promise<Metadata> {
   const categoryService = new CategoryService();
   const { category } = await params;
   const categoryData = await categoryService.getBySlug(category);
 
   if (!categoryData) {
     return {
-      title: "カテゴリが見つかりません - FoodMedia",
-      description: "指定されたカテゴリが見つかりませんでした。",
+      title: 'カテゴリが見つかりません - FoodMedia',
+      description: '指定されたカテゴリが見つかりませんでした。',
     };
   }
 
@@ -35,58 +40,26 @@ const CategoryPage = async ({ params }: CategoryPageProps) => {
 
   if (!categoryData) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-2xl font-bold text-red-600">
-          カテゴリが見つかりません
-        </h1>
+      <div className="mx-auto px-4 py-8">
+        <h1 className="text-2xl font-bold text-red-600">カテゴリが見つかりません</h1>
       </div>
     );
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-4">{categoryData.name}</h1>
-        {categoryData.description && (
-          <p className="text-gray-600 mb-4">{categoryData.description}</p>
-        )}
-        <p className="text-sm text-gray-500">記事数: {categoryData.count}件</p>
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {categoryData.posts.map((post) => (
-          <article
-            key={post.id}
-            className="bg-white rounded-lg shadow-md overflow-hidden"
-          >
-            {post.featuredImage?.node?.sourceUrl && (
-              <Image
-                src={post.featuredImage.node.sourceUrl}
-                alt={post.title}
-                width={300}
-                height={225}
-                className="w-full h-48 object-cover"
-              />
-            )}
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-2">
-                <a
-                  href={post.uri}
-                  className="hover:text-blue-600 transition-colors"
-                >
-                  {post.title}
-                </a>
-              </h2>
-            </div>
-          </article>
-        ))}
-      </div>
-
-      {categoryData.posts.length === 0 && (
-        <div className="text-center py-8">
-          <p className="text-gray-500">このカテゴリには記事がありません。</p>
-        </div>
-      )}
+    <div className="mx-auto px-4 py-8">
+      <CategoryTitle name={categoryData.name} />
+      {/* <p className="text-sm text-gray-500">記事数: {categoryData.count}件</p> */}
+      <TowColumn>
+        <TowColumnMain>
+          <div className="mx-auto bg-white">
+            <PostList posts={categoryData.posts} />
+          </div>
+        </TowColumnMain>
+        <TowColumnSidebar>
+          <SideNav />
+        </TowColumnSidebar>
+      </TowColumn>
     </div>
   );
 };

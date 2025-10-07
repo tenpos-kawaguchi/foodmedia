@@ -13,10 +13,24 @@ class PostService {
     }
   }
 
+  public async getPopularPosts(limit: number = 10): Promise<PostType[]> {
+    try {
+      const res = await RepositoryFactory.post.getPopularPosts(limit);
+
+      // popularPostsクエリのレスポンス形式に対応
+      const popularPosts = res.data.data.popularPosts || [];
+      return popularPosts;
+    } catch (error) {
+      console.error('❌ Error in getPopularPosts:', error);
+      return []; // エラーだった場合は空の配列を返す
+    }
+  }
+
   public async getBySlug(slug: string): Promise<PostType | null> {
     try {
       // まずスラッグで試行
       const res = await RepositoryFactory.post.getBySlug(slug);
+      // console.log('🎯 getBySlug:', res);
       if (res.data.data.post) {
         return res.data.data.post;
       }

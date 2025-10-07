@@ -1,4 +1,4 @@
-import Repository from "./Repository";
+import Repository from './Repository';
 
 class CategoryRepository {
   public getList() {
@@ -32,6 +32,7 @@ class CategoryRepository {
           edges {
             node {
               id
+              date
               slug
               title
               postId

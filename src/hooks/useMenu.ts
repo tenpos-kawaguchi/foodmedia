@@ -1,8 +1,8 @@
-import { useState, useEffect } from "react";
-import MenuService, { MenuItemType } from "@/services/MenuService";
+import { useState, useEffect } from 'react';
+import MenuService, { MenuItem } from '@/services/MenuService';
 
 export const useMenu = () => {
-  const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
+  const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -12,11 +12,16 @@ export const useMenu = () => {
         setLoading(true);
         setError(null);
         const menuService = new MenuService();
-        const categories = await menuService.getMenuCategories();
-        setMenuItems(categories);
+        const menu = await menuService.getMainMenu();
+
+        if (menu && menu.menuItems && menu.menuItems.nodes) {
+          setMenuItems(menu.menuItems.nodes);
+        } else {
+          setMenuItems([]);
+        }
       } catch (err) {
-        console.error("メニューデータの取得に失敗しました:", err);
-        setError("メニューデータの取得に失敗しました");
+        console.error('メニューデータの取得に失敗しました:', err);
+        setError('メニューデータの取得に失敗しました');
       } finally {
         setLoading(false);
       }

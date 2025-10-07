@@ -1,11 +1,11 @@
-"use client";
+'use client';
 
-import React from "react";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import styles from "./nav.module.css";
-import { useMenu } from "@/hooks/useMenu";
-import type { MenuItemType } from "@/services/MenuService";
+import React from 'react';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import styles from './nav.module.css';
+import { useMenu } from '@/hooks/useMenu';
+import type { MenuItem } from '@/services/MenuService';
 
 const Nav = () => {
   const { menuItems, loading, error } = useMenu();
@@ -15,26 +15,12 @@ const Nav = () => {
     return pathname === uri;
   };
 
-  const isCurrentCategory = (item: MenuItemType) => {
+  const isCurrentCategory = (item: MenuItem) => {
     return pathname.startsWith(item.uri) || isCurrentPage(item.uri);
   };
 
-  // 未分類カテゴリを除外するフィルタリング
-  const filteredMenuItems = menuItems.filter((item) => {
-    // 未分類カテゴリを除外
-    if (item.name === "未分類" || item.slug === "uncategorized") {
-      return false;
-    }
-
-    // 子カテゴリも未分類を除外
-    if (item.children) {
-      item.children = item.children.filter((child) => {
-        return child.name !== "未分類" && child.slug !== "uncategorized";
-      });
-    }
-
-    return true;
-  });
+  // メニューアイテムのフィルタリング（必要に応じて）
+  const filteredMenuItems = menuItems;
 
   if (loading) {
     return (
@@ -63,37 +49,31 @@ const Nav = () => {
   return (
     <div>
       <nav id="global_menu" className="bg-gray-100 flex justify-center">
-        <ul
-          className={`${styles.menu} flex justify-between max-w-[1130px] mx-auto`}
-        >
+        <ul className={`${styles.menu} flex justify-between max-w-[1130px] mx-auto`}>
           {filteredMenuItems.map((item) => (
             <li
               key={item.id}
               className={`${styles.menuItem} ${styles.menuItemTypeTaxonomy} ${styles.menuItemObjectCategory} ${
-                item.children && item.children.length > 0
+                item.childItems && item.childItems.nodes && item.childItems.nodes.length > 0
                   ? styles.menuItemHasChildren
-                  : ""
-              } ${
-                isCurrentCategory(item) ? styles.currentCategoryAncestor : ""
-              }`}
+                  : ''
+              } ${isCurrentCategory(item) ? styles.currentCategoryAncestor : ''}`}
             >
-              <Link href={item.uri}>{item.name}</Link>
-              {item.children && item.children.length > 0 && (
+              <Link href={item.uri}>{item.label}</Link>
+              {item.childItems && item.childItems.nodes && item.childItems.nodes.length > 0 && (
                 <ul className={styles.subMenu}>
-                  {item.children.map((child) => (
+                  {item.childItems.nodes.map((child) => (
                     <li
                       key={child.id}
                       className={`${styles.menuItem} ${styles.menuItemTypeTaxonomy} ${styles.menuItemObjectCategory} ${
-                        isCurrentPage(child.uri) ? styles.currentMenuItem : ""
+                        isCurrentPage(child.uri) ? styles.currentMenuItem : ''
                       }`}
                     >
                       <Link
                         href={child.uri}
-                        aria-current={
-                          isCurrentPage(child.uri) ? "page" : undefined
-                        }
+                        aria-current={isCurrentPage(child.uri) ? 'page' : undefined}
                       >
-                        {child.name}
+                        {child.label}
                       </Link>
                     </li>
                   ))}

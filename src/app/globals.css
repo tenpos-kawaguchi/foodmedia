@@ -1,3 +1,34 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Custom Fonts */
+@font-face {
+  font-family: 'design_plus';
+  src: url('/fonts/design_plus.eot?v=1.2');
+  src: url('/fonts/design_plus.eot?v=1.2#iefix') format('embedded-opentype'),
+    url('/fonts/design_plus.woff?v=1.2') format('woff'),
+    url('/fonts/design_plus.ttf?v=1.2') format('truetype'),
+    url('/fonts/design_plus.svg?v=1.2#design_plus') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'footer_bar';
+  src: url('/fonts/footer_bar.eot?v=1.2');
+  src: url('/fonts/footer_bar.eot?v=1.2#iefix') format('embedded-opentype'),
+    url('/fonts/footer_bar.woff?v=1.2') format('woff'),
+    url('/fonts/footer_bar.ttf?v=1.2') format('truetype'),
+    url('/fonts/footer_bar.svg?v=1.2#footer_bar') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+a:hover {
+  color: #1e73be;
+}
+
+/* WordPress Theme Styles */
+@import url('./styles/wordpress/style.css');
+@import url('./styles/wordpress/toc.css');

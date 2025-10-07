@@ -1,20 +1,24 @@
-import Repository from "./Repository";
+import Repository from './Repository';
 
 class MenuRepository {
   public getMainMenu() {
-    return Repository(`query GetMainMenu {
-      menus(where: {location: PRIMARY}) {
+    return Repository(`query GetGlobalMenu {
+      menuItems(where: {location: GLOBAL_MENU, parentDatabaseId: 0}, first: 100) {
         nodes {
           id
-          name
-          menuItems {
+          uri
+          label
+          childItems {
             nodes {
               id
               label
-              url
+              uri
+              parentDatabaseId
               parentId
             }
           }
+          parentId
+          parentDatabaseId
         }
       }
     }`).getWp();

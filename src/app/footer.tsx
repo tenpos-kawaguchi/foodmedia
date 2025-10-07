@@ -1,16 +1,20 @@
 import React from 'react';
 import Link from 'next/link';
+import FooterNav from '@/app/components/common/nav/FooterNav';
+import FooterLeft from '@/app/components/layouts/footer/FooterLeft';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gray-800 text-white">
-      <div className="container mx-auto px-4 py-8">
+    <footer className="text-black">
+      <div className="mx-auto px-4 py-8 bg-gray-300">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div>
-            <h3 className="text-xl font-bold mb-4">FoodMedia</h3>
-            <p className="text-gray-300">食に関する情報を共有するプラットフォームです。</p>
+          <div
+            className="widget_text widget_content clearfix widget_custom_html"
+            id="custom_html-2"
+          >
+            <FooterLeft />
           </div>
 
           <div>
@@ -36,10 +40,14 @@ const Footer = () => {
             </p>
           </div>
         </div>
+      </div>
 
-        <div className="border-t border-gray-700 mt-8 pt-8 text-center">
-          <p className="text-gray-300">© {currentYear} FoodMedia. All rights reserved.</p>
-        </div>
+      <FooterNav />
+
+      <div className="bg-custom-red py-6 text-center">
+        <p className="text-white text-sm">
+          Copyright © {currentYear} tenpos foodmedia All Rights Reserved.
+        </p>
       </div>
     </footer>
   );
