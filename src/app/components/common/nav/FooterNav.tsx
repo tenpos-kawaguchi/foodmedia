@@ -9,7 +9,7 @@ const FooterNav = () => {
 
   return (
     <div className="py-4">
-      <ul id="menu-footer" className="flex justify-center gap-8 max-w-[1130px] mx-auto">
+      <ul id="menu-footer" className="flex justify-center gap-8 max-w-[1120px] mx-auto">
         {loading ? (
           <li>メニューを読み込み中...</li>
         ) : error ? (

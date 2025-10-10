@@ -9,7 +9,7 @@ const Footer = () => {
   return (
     <footer className="text-black">
       <div className="mx-auto px-4 py-8 bg-gray-300">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1120px] mx-auto">
           <div
             className="widget_text widget_content clearfix widget_custom_html"
             id="custom_html-2"
