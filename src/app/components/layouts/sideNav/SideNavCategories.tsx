@@ -1,12 +1,33 @@
 'use client';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { useMenu } from '@/hooks/useMenu';
+import MenuService, { MenuItemType } from '@/services/MenuService';
 import styles from '@/app/styles/layouts/sideNav/sideNav.module.css';
 
 const SideNavCategories = () => {
-  const { menuItems, loading, error } = useMenu();
+  const [menuItems, setMenuItems] = useState<MenuItemType[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const menuService = new MenuService();
+        const categories = await menuService.getMenuCategories();
+        setMenuItems(categories);
+      } catch (err) {
+        console.error('カテゴリデータの取得に失敗しました:', err);
+        setError('カテゴリデータの取得に失敗しました');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, []);
 
   if (loading) {
     return (
