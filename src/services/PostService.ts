@@ -28,9 +28,14 @@ class PostService {
 
   public async getBySlug(slug: string): Promise<PostType | null> {
     try {
-      // まずスラッグで試行
+      // 数値の場合は記事IDとして試行
+      if (/^\d+$/.test(slug)) {
+        const resById = await RepositoryFactory.post.getById(slug);
+        return resById.data.data.post;
+      }
+
+      // 文字列の場合はスラッグとして試行
       const res = await RepositoryFactory.post.getBySlug(slug);
-      // console.log('🎯 getBySlug:', res);
       if (res.data.data.post) {
         return res.data.data.post;
       }

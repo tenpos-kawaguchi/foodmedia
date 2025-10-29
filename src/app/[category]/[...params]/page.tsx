@@ -192,27 +192,14 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
       );
     }
   } else if (subParams.length === 2) {
-    // サブカテゴリ記事詳細ページ
+    // サブカテゴリ記事詳細ページまたはカテゴリページ
     const [subCategory, slug] = subParams;
-    // const fullSlug = `${category}/${subCategory}`;
-    const categoryData = await categoryService.getBySlug(subCategory);
 
-    if (!categoryData) {
-      return (
-        <div className="container mx-auto px-4 py-8">
-          <h1 className="text-2xl font-bold text-red-600">サブカテゴリが見つかりません</h1>
-          <p className="text-gray-600 mt-2">
-            指定されたサブカテゴリ「{category}/{subCategory}
-            」が見つかりませんでした。
-          </p>
-        </div>
-      );
-    }
+    // まず最後のパラメータ（slug）をカテゴリとして試行
+    const categoryData = await categoryService.getBySlug(slug);
 
-    // 投稿データを取得
-    const post = await postService.getBySlug(slug);
-
-    if (!post) {
+    if (categoryData) {
+      // カテゴリが見つかった場合 - サブカテゴリ一覧ページとして表示
       return (
         <div className="container mx-auto px-4 py-8">
           <nav className="text-sm text-gray-500 mb-2">
@@ -226,36 +213,73 @@ const CategoryParamsPage = async ({ params }: CategoryParamsPageProps) => {
             <span className="mx-2">/</span>
             <span>{slug}</span>
           </nav>
-          <h1 className="text-2xl font-bold text-red-600">記事が見つかりません</h1>
-          <p className="text-gray-600 mt-2">指定された記事「{slug}」が見つかりませんでした。</p>
+          <CategoryTitle name={categoryData.name} />
+          <TowColumn>
+            <TowColumnMain>
+              <div className="mx-auto bg-white">
+                {categoryData.description && (
+                  <p className="text-gray-600 mb-4">{categoryData.description}</p>
+                )}
+                <PostList posts={categoryData.posts} />
+              </div>
+            </TowColumnMain>
+            <TowColumnSidebar>
+              <SideNav />
+            </TowColumnSidebar>
+          </TowColumn>
+        </div>
+      );
+    } else {
+      // カテゴリが見つからない場合 - 記事詳細ページとして試行
+      const post = await postService.getBySlug(slug);
+
+      if (!post) {
+        return (
+          <div className="container mx-auto px-4 py-8">
+            <nav className="text-sm text-gray-500 mb-2">
+              <a href={`/${category}`} className="hover:text-blue-600">
+                {category}
+              </a>
+              <span className="mx-2">/</span>
+              <a href={`/${category}/${subCategory}`} className="hover:text-blue-600">
+                {subCategory}
+              </a>
+              <span className="mx-2">/</span>
+              <span>{slug}</span>
+            </nav>
+            <h1 className="text-2xl font-bold text-red-600">ページが見つかりません</h1>
+            <p className="text-gray-600 mt-2">
+              指定されたページ「{category}/{subCategory}/{slug}」が見つかりませんでした。
+            </p>
+          </div>
+        );
+      }
+
+      return (
+        <div className="container mx-auto px-4 py-8">
+          <nav className="text-sm text-gray-500 mb-2">
+            <a href={`/${category}`} className="hover:text-blue-600">
+              {category}
+            </a>
+            <span className="mx-2">/</span>
+            <a href={`/${category}/${subCategory}`} className="hover:text-blue-600">
+              {subCategory}
+            </a>
+            <span className="mx-2">/</span>
+            <span>{slug}</span>
+          </nav>
+
+          <TowColumn>
+            <TowColumnMain>
+              <PostDetail post={post} />
+            </TowColumnMain>
+            <TowColumnSidebar>
+              <SideNav />
+            </TowColumnSidebar>
+          </TowColumn>
         </div>
       );
     }
-
-    return (
-      <div className="container mx-auto px-4 py-8">
-        <nav className="text-sm text-gray-500 mb-2">
-          <a href={`/${category}`} className="hover:text-blue-600">
-            {category}
-          </a>
-          <span className="mx-2">/</span>
-          <a href={`/${category}/${subCategory}`} className="hover:text-blue-600">
-            {subCategory}
-          </a>
-          <span className="mx-2">/</span>
-          <span>{slug}</span>
-        </nav>
-
-        <TowColumn>
-          <TowColumnMain>
-            <PostDetail post={post} />
-          </TowColumnMain>
-          <TowColumnSidebar>
-            <SideNav />
-          </TowColumnSidebar>
-        </TowColumn>
-      </div>
-    );
   } else {
     notFound();
   }

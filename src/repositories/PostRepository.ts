@@ -29,10 +29,6 @@ class PostRepository {
   }
 
   public getPopularPosts(limit: number = 10) {
-    console.log('🚀 PostRepository.getPopularPosts called with limit:', limit);
-    console.log('📝 Using popularPosts query for ranking');
-    console.log('📋 Variables:', { limit });
-
     return Repository(
       `query getRanking($limit: Int!) {
         popularPosts(limit: $limit) {

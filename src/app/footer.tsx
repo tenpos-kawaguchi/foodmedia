@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import FooterNav from '@/app/components/common/nav/FooterNav';
 import FooterLeft from '@/app/components/layouts/footer/FooterLeft';
+import FooterRight from '@/app/components/layouts/footer/FooterRight';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -34,10 +35,7 @@ const Footer = () => {
           </div>
 
           <div>
-            <h4 className="text-lg font-semibold mb-4">お問い合わせ</h4>
-            <p className="text-gray-300">
-              ご質問やご意見がございましたら、お気軽にお問い合わせください。
-            </p>
+            <FooterRight />
           </div>
         </div>
       </div>
